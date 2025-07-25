@@ -66,7 +66,6 @@ const logout=async ()=>{
     await logOutUser()
     setIsLoggedIn(false)
     setUser(null)
-    navigate('/login')
     window.location.reload()
 
 }
