@@ -1,7 +1,5 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { useAuth } from "../components/context/AuthContext";
-import { useNavigate } from "react-router-dom";
 
 
 export const signUpUser = async (name:string, email: string, password: string) => {

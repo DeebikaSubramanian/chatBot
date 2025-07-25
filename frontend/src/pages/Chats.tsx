@@ -7,10 +7,8 @@ import ChatItem from "../components/chat/ChatItem";
 import {IoMdSend} from "react-icons/io"
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { deleteUserChats, getUserChats, sendChatRequest } from "../helpers/apiCommunicator";
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { coldarkCold } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import toast from "react-hot-toast";
-import { Navigate, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 
 
 type Message={role:"user"|"assistant",content:string}

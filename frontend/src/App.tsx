@@ -7,7 +7,7 @@ import Chats from "./pages/Chats"
 import NotFound from "./NotFound"
 import { useAuth } from "./components/context/AuthContext"
 import SignUp from "./pages/SignUp"
-import Footer from "./components/footer/Footer"
+
 
 
 
