@@ -7,7 +7,9 @@ import cors from "cors"
 
 config()
 const app=express()
-app.use(cors({origin:"https://chatbot-y49i.onrender.com",credentials:true}))
+
+app.use(cors({origin:"https://chatbot-frontend-cr87.onrender.com",credentials:true}))
+
 app.use(express.json())
 app.use(cookieParser(process.env.COOKIE_SECRET))                     //cookie parser is used to send cookies from backend to frontend
 

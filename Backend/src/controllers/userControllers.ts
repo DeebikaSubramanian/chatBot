@@ -78,7 +78,8 @@ export const loginUsers = async (req:Request,res:Response,next:NextFunction) => 
     
         //setting http only for cookies  
     
-        res.cookie(COOKIE_NAME,token,{path:"/",expires,httpOnly:true,signed:true}) 
+        res.cookie(COOKIE_NAME,token,{path:"/",expires,httpOnly:true,signed:true, secure: true,
+  sameSite: "none" }) 
     return res.status(200).json({ message: "Login Successfully", name:user.name,email:user.email });
   } catch (error) {
     const err = error as Error;
