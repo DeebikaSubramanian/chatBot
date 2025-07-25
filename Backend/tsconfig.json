@@ -9,12 +9,8 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-     "typeRoots": [
-            "./node_modules/@types"
-        ],
-            "types": [
-            "@openui5/ts-types-esm"
-        ],
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["node"],
     "skipLibCheck": true,
     "lib": ["ES2022", "DOM"]
   },
