@@ -19,6 +19,7 @@ export const generateChatCompletion =async (req:Request,res:Response,next:NextFu
     //grab chats of user
    
     const chats=user.chats.map(({role,content})=>({role,content})) as ChatCompletionRequestMessage[]   //role and content are from model which we already defined. check models. there user have name,password,email and chats. chats have role and content.
+   
     chats.push({content:message,role:"user"})  //to push into chats 
     user.chats.push({content:message,role:"user"})  //as well as we have to push it into user
      
@@ -26,8 +27,16 @@ export const generateChatCompletion =async (req:Request,res:Response,next:NextFu
 
     const config=configureOpenAI();
     const openai=new OpenAIApi(config)
-    const chatResponse=await openai.createChatCompletion({model:"gpt-3.5-turbo",messages:chats})  
-    user.chats.push(chatResponse.data.choices[0].message)
+   const chatResponse = await openai.createChatCompletion({
+  model: "gpt-3.5-turbo",
+  messages: chats
+});
+
+const Message = chatResponse.data.choices[0]?.message;
+
+if (Message) {
+  user.chats.push(message); // only push if message is defined
+}
     await user.save()
     return res.status(200).json({chats:user.chats})
 
@@ -56,9 +65,10 @@ export const sendChatsToUser= async (req:Request,res:Response,next:NextFunction)
     }
     return res.status(200).json({ message: "Success", chats:user.chats });
   } catch (error) {
+    const err = error as Error;
     return res
       .status(400)
-      .json({ message: "Cannot Login", cause: error.message });
+      .json({ message: "Cannot Login", cause: err.message });
   }
 };
 
@@ -81,8 +91,9 @@ export const deleteChats= async (req:Request,res:Response,next:NextFunction) => 
     await user.save()
     return res.status(200).json({ message: "Deleted"});
   } catch (error) {
+    const err = error as Error;
     return res
       .status(400)
-      .json({ message: "Cannot Delete", cause: error.message });
+      .json({ message: "Cannot Delete", cause: err.message });
   }
 };

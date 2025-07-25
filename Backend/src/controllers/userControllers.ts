@@ -11,7 +11,8 @@ export const getAllUsers=async(req:Request,res:Response,next:NextFunction)=>{
     }
     catch(error)
     {
-        return res.status(400).json({message:"Cannot Found User Details",cause:error.message})
+      const err = error as Error;
+        return res.status(400).json({message:"Cannot Found User Details",cause:err.message})
     }
 }
 
@@ -44,9 +45,10 @@ export const postAllUsers = async (req:Request,res:Response,next:NextFunction) =
 
     return res.status(200).json({ message: "Registered Successfully", name:user.name,email:user.email });
   } catch (error) {
+    const err = error as Error;
     return res
       .status(400)
-      .json({ message: "Cannot Register User Details", cause: error.message });
+      .json({ message: "Cannot Register User Details", cause: err.message });
   }
 };
 
@@ -79,9 +81,10 @@ export const loginUsers = async (req:Request,res:Response,next:NextFunction) => 
         res.cookie(COOKIE_NAME,token,{path:"/",expires,httpOnly:true,signed:true}) 
     return res.status(200).json({ message: "Login Successfully", name:user.name,email:user.email });
   } catch (error) {
+    const err = error as Error;
     return res
       .status(400)
-      .json({ message: "Cannot Login", cause: error.message });
+      .json({ message: "Cannot Login", cause: err.message });
   }
 };
 
@@ -100,9 +103,10 @@ export const verifyUser = async (req:Request,res:Response,next:NextFunction) => 
     }
     return res.status(200).json({ message: "Login Successfully", name:user.name,email:user.email });
   } catch (error) {
+    const err = error as Error;
     return res
       .status(400)
-      .json({ message: "Cannot Login", cause: error.message });
+      .json({ message: "Cannot Login", cause: err.message });
   }
 };
 
@@ -124,9 +128,10 @@ export const UserLogOut = async (req:Request,res:Response,next:NextFunction) => 
 
     return res.status(200).json({ message: "Ok", name:user.name,email:user.email });
   } catch (error) {
+    const err = error as Error;
     return res
       .status(400)
-      .json({ message: "Cannot Logout", cause: error.message });
+      .json({ message: "Cannot Logout", cause: err.message });
   }
 };
 

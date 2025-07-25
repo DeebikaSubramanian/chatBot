@@ -3,6 +3,9 @@ import {connect,disconnect} from "mongoose"
  async function connectToDataBase(){
 
     try{
+        if (!process.env.MONGODB_URL) {
+  throw new Error("MONGODB_URL not defined in environment variables");
+}
         await connect(process.env.MONGODB_URL)
     }
     catch(error)
