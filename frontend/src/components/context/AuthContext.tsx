@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { checkAuthStatus, loginUser, logOutUser, signUpUser } from "../../helpers/apiCommunicator";
-import { useNavigate } from "react-router-dom";
 
 //As we are writing typescript also .tsx file we have define the type as follows.
 
@@ -21,7 +20,6 @@ const AuthContext=createContext<UserAuth|null>(null);
 
 export const AuthProvider=({children}:{children: ReactNode })=>
         {
-             const navigate=useNavigate()
            
 const [user,setUser]=useState<User|null>(null)   // <User|null>is the type,(null) is the initial value.
 const [isLoggedIn,setIsLoggedIn]=useState(false)
