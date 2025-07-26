@@ -29,7 +29,8 @@ export const postAllUsers = async (req:Request,res:Response,next:NextFunction) =
 
     //COOKIE_NAME is a name of the cookie we provide, it can be anything.  this stmt is to clear cookie first then start and we define the name in constant.ts file.
     //domain will once we deploy. for now its localhost.
-    res.clearCookie(COOKIE_NAME,{httpOnly:true,signed:true,domain:"localhost"})  
+   res.clearCookie(COOKIE_NAME,{httpOnly:true,signed:true,sameSite: "none",
+secure: true,path:"/"}) 
 
         //for jwt token
         const token=createToken (user._id.toString(),user.email,"7d")  //we have these three parameters in createToken function defined in tokenManager.ts file. check that.
@@ -39,8 +40,10 @@ export const postAllUsers = async (req:Request,res:Response,next:NextFunction) =
         expires.setDate(expires.getDate()+7)
     
         //setting http only for cookies  
+        //@ts-ignore
     
-        res.cookie(COOKIE_NAME,token,{path:"/",domain:"localhost",expires,httpOnly:true,signed:true}) 
+            res.clearCookie(COOKIE_NAME,{httpOnly:true,signed:true,sameSite: "None",
+secure: true,path:"/"})  
 
 
     return res.status(200).json({ message: "Registered Successfully", name:user.name,email:user.email });
@@ -67,7 +70,9 @@ export const loginUsers = async (req:Request,res:Response,next:NextFunction) => 
 
     //COOKIE_NAME is a name of the cookie we provide, it can be anything.  this stmt is to clear cookie first then start and we define the name in constant.ts file.
     //domain will once we deploy. for now its localhost.
-    res.clearCookie(COOKIE_NAME,{httpOnly:true,signed:true})  
+  
+    res.clearCookie(COOKIE_NAME,{httpOnly:true,signed:true,sameSite: "none",
+secure: true,path:"/"})  
 
         //for jwt token
         const token=createToken (user._id.toString(),user.email,"7d")  //we have these three parameters in createToken function defined in tokenManager.ts file. check that.
@@ -78,7 +83,7 @@ export const loginUsers = async (req:Request,res:Response,next:NextFunction) => 
     
         //setting http only for cookies  
     
-        res.cookie(COOKIE_NAME,token,{path:"/",expires,httpOnly:true,signed:true, secure: true,
+  res.cookie(COOKIE_NAME,token,{path:"/",expires,httpOnly:true,signed:true, secure: true,
   sameSite: "none" }) 
     return res.status(200).json({ message: "Login Successfully", name:user.name,email:user.email });
   } catch (error) {
@@ -125,7 +130,9 @@ export const UserLogOut = async (req:Request,res:Response,next:NextFunction) => 
       return res.status(401).json({message:"Permission is not matched"})
     }
 
-     res.clearCookie(COOKIE_NAME,{httpOnly:true,signed:true,path:"/"})  
+
+     res.clearCookie(COOKIE_NAME,{httpOnly:true,signed:true,sameSite: "none",
+secure: true,path:"/"})  
 
     return res.status(200).json({ message: "Ok", name:user.name,email:user.email });
   } catch (error) {

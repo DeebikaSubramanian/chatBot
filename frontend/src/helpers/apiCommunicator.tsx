@@ -179,9 +179,8 @@ export const deleteUserChats = async () => {
 
 export const logOutUser = async () => {
  
-    
-  try {
-    const res=await axios.get("/users/logout", {withCredentials: true});   
+    try {
+    const res=await axios.get("/users/logout");   
     const data= res.data
     return data;
   } 

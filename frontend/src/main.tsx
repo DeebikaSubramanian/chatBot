@@ -7,8 +7,9 @@ import { BrowserRouter } from 'react-router-dom'
 import { AuthProvider } from './components/context/AuthContext.tsx'
 import axios from 'axios'
 import {Toaster} from 'react-hot-toast'
-
+// axios.defaults.baseURL="http://localhost:5000/api/v1"
 axios.defaults.baseURL="https://chatbot-y49i.onrender.com/api/v1"
+
 axios.defaults.withCredentials=true;  //Allows Axios to send cookies and authentication headers along with requests.
 
 //Especially useful when you're communicating with a backend that uses sessions or cookies for login.
